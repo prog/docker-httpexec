@@ -40,6 +40,7 @@ app.post("/exec", jsonBodyParser, bearerTokenMiddleware, (req, res) => {
 	const proc = cp.spawn(command, args);
 	proc.stdout.on("data", (data: Buffer) => res.write("out:" + data.toString("base64") + "\n"));
 	proc.stderr.on("data", (data: Buffer) => res.write("err:" + data.toString("base64") + "\n"));
+	proc.on("error", err => res.write("err:" + Buffer.from(err.message + "\n", "utf8").toString("base64") + "\n"));
 	proc.on("close", code => res.end("res:" + code));
 	req.connection.on("close", () => proc.kill("SIGINT"));
 });
