@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+if [ $# -eq 0 ]; then
+  first="sh"
+else
+  first="$1"
+  shift
+fi
+
+if [ "$first" = "sh" ]; then
+  exec sh "$@"
+fi
+
+if [ "$first" = "server" ]; then
+  exec httpexec-server "$@"
+fi
+
+exec httpexec "$@"
