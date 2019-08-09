@@ -12,10 +12,11 @@ Usage
 
   ```bash
   docker run --rm \
-  -e HTTPEXEC_TOKEN=12345 \
-  # -p '8080:80' \
-  # -v '/var/run/docker.sock:/var/run/docker.sock' \
-  prog/httpexec server
+    -e HTTPEXEC_TOKEN=12345 \
+    # -p '8080:80' \
+    # -v '/var/run/docker.sock:/var/run/docker.sock' \
+    # -v '/root:/root' \
+    prog/httpexec server
   ```
 
 - in Docker Compose/Stack:
@@ -26,8 +27,9 @@ Usage
     command: server
     environment:
       - 'HTTPEXEC_TOKEN=12345'
-    # volumes:
-    #  - '/var/run/docker.sock:/var/run/docker.sock:ro'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+    # - '/root/.docker:/root/.docker'
     # ports:
     #   - '<port>:80'
     deploy:
