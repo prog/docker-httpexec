@@ -15,4 +15,4 @@ if [ "$first" = "server" ]; then
   exec httpexec-server "$@"
 fi
 
-exec httpexec "$@"
+exec httpexec "$first" "$@"
